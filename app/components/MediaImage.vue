@@ -1,7 +1,13 @@
 <script setup lang="ts">
-// Фото с оптимизацией (@nuxt/image: AVIF/WebP, адаптивные размеры, lazy).
+// Фото с оптимизацией (@nuxt/image: WebP, srcset под все экраны, lazy).
+// `vw` — какую долю ширины экрана фото занимает на десктопе (на мобильных всегда 100vw).
 // Пока файла нет — показывается нейтральная заглушка того же размера, вёрстка не «прыгает».
-defineProps<{ src?: string, alt?: string, sizes?: string, eager?: boolean }>()
+const props = withDefaults(defineProps<{ src?: string, alt?: string, vw?: number, eager?: boolean }>(), { vw: 100 })
+
+const sizes = computed(() => {
+  const d = `${props.vw}vw`
+  return `xs:100vw sm:100vw md:${props.vw > 50 ? '100vw' : '50vw'} lg:${d} xl:${d} xxl:${d} 2xl:${d}`
+})
 </script>
 
 <template>
@@ -9,7 +15,8 @@ defineProps<{ src?: string, alt?: string, sizes?: string, eager?: boolean }>()
     v-if="src"
     :src="src"
     :alt="alt || ''"
-    :sizes="sizes || '100vw'"
+    :sizes="sizes"
+    format="webp"
     :loading="eager ? 'eager' : 'lazy'"
     :fetchpriority="eager ? 'high' : undefined"
     class="media"

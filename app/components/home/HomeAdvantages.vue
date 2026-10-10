@@ -13,7 +13,7 @@ const cards = [
       <SectionTitle>Преимущества</SectionTitle>
       <ul class="adv__grid">
         <li v-for="card in cards" :key="card.title" class="card">
-          <MediaImage :src="card.image" :alt="card.title" sizes="sm:100vw md:50vw lg:473px" />
+          <MediaImage :src="card.image" :alt="card.title" :vw="30" />
           <h3 class="card__title h2">{{ card.title }}</h3>
         </li>
       </ul>

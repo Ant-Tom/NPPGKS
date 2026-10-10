@@ -33,9 +33,9 @@ const items = [
         <div class="container row__inner">
           <!-- коллаж из фото: большое + 2 маленьких + светлый квадрат, как в макете -->
           <div class="collage" :class="`collage--${item.layout}`" aria-hidden="true">
-            <span class="collage__big"><MediaImage :src="undefined" sizes="202px" /></span>
-            <span class="collage__s1"><MediaImage :src="undefined" sizes="100px" /></span>
-            <span class="collage__s2"><MediaImage :src="undefined" sizes="100px" /></span>
+            <span class="collage__big"><MediaImage :src="undefined" :vw="15" /></span>
+            <span class="collage__s1"><MediaImage :src="undefined" :vw="15" /></span>
+            <span class="collage__s2"><MediaImage :src="undefined" :vw="15" /></span>
             <span class="collage__light" />
           </div>
           <div class="row__text">
