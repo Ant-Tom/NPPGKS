@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-10-01',
   devtools: { enabled: true },
 
-  modules: ['@nuxt/image', '@nuxt/fonts', '@nuxtjs/sitemap', '@nuxtjs/robots'],
+  modules: ['@nuxt/image', '@nuxtjs/sitemap', '@nuxtjs/robots'],
 
   css: ['~/assets/css/main.css'],
 
@@ -20,14 +20,23 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       titleTemplate: '%s — НПП ГКС',
-      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
-      meta: [{ name: 'theme-color', content: '#ffffff' }],
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        // основной шрифт — сразу в предзагрузку, чтобы не было «прыжка» текста
+        { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: '', href: '/fonts/pt-sans-cyrillic-400-normal.woff2' },
+      ],
+      meta: [{ name: 'theme-color', content: '#111111' }],
     },
   },
 
   // Все страницы пререндерятся в статический HTML: максимум скорости и индексации
   nitro: {
-    prerender: { crawlLinks: true, routes: ['/'] },
+    prerender: {
+      crawlLinks: true,
+      routes: ['/'],
+      // TODO: вернуть true, когда будут свёрстаны все разделы из меню (сейчас часть ссылок ведёт на 404)
+      failOnError: false,
+    },
     compressPublicAssets: true,
   },
 
@@ -41,9 +50,6 @@ export default defineNuxtConfig({
     screens: { xs: 360, sm: 640, md: 768, lg: 1024, xl: 1280, xxl: 1440, '2xl': 1920 },
   },
 
-  fonts: {
-    defaults: { weights: [400, 500, 600, 700], subsets: ['latin', 'cyrillic'] },
-  },
 
   experimental: { payloadExtraction: true },
 })

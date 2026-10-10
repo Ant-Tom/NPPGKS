@@ -1,10 +1,12 @@
 <script setup lang="ts">
-// TODO: тексты и мета-описание взять из макета Figma
+const description =
+  'НПП «ГКС» — инжиниринговая компания: системы измерений количества и показателей качества, блочно-комплектное оборудование, автоматизация технологических процессов. Более 2000 проектов «под ключ».'
+
 useSeoMeta({
-  title: 'Главная',
-  description: 'НПП ГКС — официальный сайт.',
-  ogTitle: 'НПП ГКС',
-  ogDescription: 'НПП ГКС — официальный сайт.',
+  title: 'Инжиниринг как искусство',
+  description,
+  ogTitle: 'НПП «ГКС» — инжиниринг как искусство',
+  ogDescription: description,
   ogType: 'website',
   ogLocale: 'ru_RU',
   twitterCard: 'summary_large_image',
@@ -14,9 +16,14 @@ useOrganizationSchema()
 </script>
 
 <template>
-  <section class="section">
-    <div class="container">
-      <h1>НПП ГКС</h1>
-    </div>
-  </section>
+  <div>
+    <HomeHero />
+    <!-- TODO: видео и постер из макета (Main Frame) — положить в /public/video и /public/images/home -->
+    <HomeVideo />
+    <HomeAbout />
+    <HomeProducts />
+    <HomeAdvantages />
+    <HomeFeedback />
+    <OfficesMap />
+  </div>
 </template>
