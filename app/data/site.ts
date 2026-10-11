@@ -1,4 +1,5 @@
 // Структура сайта и контакты — единый источник для меню, футера и разметки.
+import { categories, categoryUrl } from './products'
 
 export interface NavLink {
   label: string
@@ -6,14 +7,7 @@ export interface NavLink {
   children?: NavLink[]
 }
 
-export const productCategories: NavLink[] = [
-  { label: 'Системы измерений количества и показателей качества', to: '/produkciya/sistemy-izmerenij' },
-  { label: 'Блочно-комплектное технологическое оборудование', to: '/produkciya/blochno-komplektnoe-oborudovanie' },
-  { label: 'Системы автоматизации технологических процессов', to: '/produkciya/sistemy-avtomatizacii' },
-  { label: 'Контрольно-измерительные приборы', to: '/produkciya/kontrolno-izmeritelnye-pribory' },
-  { label: 'Системы газового анализа', to: '/produkciya/gazovyj-analiz' },
-  { label: 'Фильтрационное и сепарационное оборудование', to: '/produkciya/filtracionnoe-oborudovanie' },
-]
+export const productCategories: NavLink[] = categories.map(c => ({ label: c.label, to: categoryUrl(c) }))
 
 export const services: NavLink[] = [
   {

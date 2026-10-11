@@ -1,23 +1,26 @@
 <script setup lang="ts">
-// Три основных направления продукции. Фото — в /public/images/home/products/
+// Три основных направления продукции. Фото коллажей — из макета «Продукция» (/public/images/products/)
 const items = [
   {
     title: 'Системы измерений количества и показателей качества',
     text: 'НПП «ГКС» осуществляет проектирование, производство, шеф-монтаж, пусконаладочные работы, метрологическое обеспечение и ввод в действие систем измерений количества и показателей качества (узлов учёта)',
     to: '/produkciya/sistemy-izmerenij',
     layout: 'a',
+    photos: ['/images/products/sikn-neft.jpg', '/images/products/sikg-kondensat.jpg', '/images/products/sikg-gaz.jpg'],
   },
   {
     title: 'Блочно-комплектное технологическое оборудование',
     text: 'Блочные установки и технологическое оборудование позволяют комплексно решить задачи, связанные с подготовкой и вводом объекта в эксплуатацию, значительно сокращая срок строительно-монтажных работ',
     to: '/produkciya/blochno-komplektnoe-oborudovanie',
     layout: 'b',
+    photos: ['/images/products/bns.jpg', '/images/products/ba.jpg', '/images/products/bmz.jpg'],
   },
   {
     title: 'Системы автоматизации технологических процессов',
     text: 'Наше предприятие выполняет проекты комплексной автоматизации технологических процессов и производств, а также обеспечение их противопожарной защиты',
     to: '/produkciya/sistemy-avtomatizacii',
     layout: 'c',
+    photos: ['/images/products/shau.jpg', '/images/products/po.jpg', '/images/products/nku.jpg'],
   },
 ]
 </script>
@@ -33,9 +36,9 @@ const items = [
         <div class="container row__inner">
           <!-- коллаж из фото: большое + 2 маленьких + светлый квадрат, как в макете -->
           <div class="collage" :class="`collage--${item.layout}`" aria-hidden="true">
-            <span class="collage__big"><MediaImage :src="undefined" :vw="15" /></span>
-            <span class="collage__s1"><MediaImage :src="undefined" :vw="15" /></span>
-            <span class="collage__s2"><MediaImage :src="undefined" :vw="15" /></span>
+            <span class="collage__big"><MediaImage :src="item.photos[0]" :vw="15" /></span>
+            <span class="collage__s1"><MediaImage :src="item.photos[1]" :vw="10" /></span>
+            <span class="collage__s2"><MediaImage :src="item.photos[2]" :vw="10" /></span>
             <span class="collage__light" />
           </div>
           <div class="row__text">

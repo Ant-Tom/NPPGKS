@@ -1,9 +1,9 @@
 <script setup lang="ts">
-// Фото карточек — в /public/images/home/advantages/
+// Фото карточек вырезаны из макета главной (1x), под ними — чёрная подложка с заголовком
 const cards = [
-  { title: 'Более 2000 успешных проектов', image: undefined },
-  { title: 'Более 19 лет опыта', image: undefined },
-  { title: 'Профессионализм сотрудников', image: undefined },
+  { title: 'Более 2000 успешных проектов', image: '/images/home/adv-1.jpg' },
+  { title: 'Более 19 лет опыта', image: '/images/home/adv-2.jpg' },
+  { title: 'Профессионализм сотрудников', image: '/images/home/adv-3.jpg' },
 ]
 </script>
 
@@ -46,7 +46,11 @@ const cards = [
   position: relative;
   aspect-ratio: 1;
   overflow: hidden;
+  background: var(--black);
   filter: drop-shadow(0 0 20px rgba(27, 28, 33, 0.2));
+}
+.card :deep(.media) {
+  height: 74%;
 }
 .card::after {
   content: '';

@@ -14,6 +14,13 @@ export default defineNuxtConfig({
     defaultLocale: 'ru',
   },
 
+  runtimeConfig: {
+    public: {
+      // Куда отправляются формы (резюме, обратная связь) — NUXT_PUBLIC_FORM_ENDPOINT
+      formEndpoint: '',
+    },
+  },
+
   app: {
     head: {
       htmlAttrs: { lang: 'ru' },

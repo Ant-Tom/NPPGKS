@@ -1,6 +1,9 @@
 <script setup lang="ts">
 // Карта офисов: Яндекс.Карта (iframe, грузится лениво) + карточка выбранного офиса, как в макете.
+// plain — только карта с метками, без вкладок и карточки (страница «Контакты»).
 import { offices, telHref } from '~/data/site'
+
+defineProps<{ plain?: boolean }>()
 
 const active = ref(1) // в макете открыт филиал в Бугульме
 const office = computed(() => offices[active.value]!)
@@ -14,10 +17,10 @@ const src = computed(() => {
 </script>
 
 <template>
-  <section class="map" aria-label="Офисы на карте">
+  <section class="map" :class="{ 'map--plain': plain }" aria-label="Офисы на карте">
     <iframe class="map__frame" :src="src" title="НПП «ГКС» на карте" loading="lazy" allowfullscreen />
 
-    <div class="map__tabs" role="tablist" aria-label="Офисы">
+    <div v-if="!plain" class="map__tabs" role="tablist" aria-label="Офисы">
       <button
         v-for="(o, i) in offices"
         :key="o.city"
@@ -31,7 +34,7 @@ const src = computed(() => {
       </button>
     </div>
 
-    <div v-if="!closed" class="map__card">
+    <div v-if="!plain && !closed" class="map__card">
       <button type="button" class="map__close" aria-label="Закрыть" @click="closed = true">×</button>
       <p class="map__title">{{ office.title.replace(/ \(.*\)/, '') }} в г. {{ office.city }}, {{ office.street }}, {{ office.postalCode }}</p>
       <p class="map__label">Телефон</p>
@@ -46,6 +49,9 @@ const src = computed(() => {
   position: relative;
   height: 488px;
   background: #e8e4d8;
+}
+.map--plain {
+  height: clamp(360px, 47.8vw, 812px);
 }
 .map__frame {
   width: 100%;

@@ -9,8 +9,18 @@ const features = [
 
 <template>
   <section class="hero">
-    <!-- мазок кистью (зелёный → фиолетовый) из макета -->
-    <div class="hero__stroke" aria-hidden="true" />
+    <!-- мазок кистью (зелёный → синий → фиолетовый) — картинка из макета -->
+    <NuxtImg
+      src="/images/home/hero-stroke.png"
+      alt=""
+      width="1237"
+      height="632"
+      sizes="xs:120vw md:100vw lg:73vw"
+      format="webp"
+      fetchpriority="high"
+      class="hero__stroke"
+      aria-hidden="true"
+    />
 
     <div class="container hero__inner">
       <h1 class="hero__title">
@@ -38,19 +48,15 @@ const features = [
 }
 .hero__stroke {
   position: absolute;
-  top: -12px;
-  left: 30%;
-  width: 73%;
-  height: 604px;
-  max-height: 80%;
-  background:
-    radial-gradient(ellipse 45% 30% at 20% 55%, rgba(167, 175, 57, 0.95), transparent 70%),
-    radial-gradient(ellipse 40% 26% at 45% 45%, rgba(167, 175, 57, 0.8), transparent 70%),
-    radial-gradient(ellipse 35% 22% at 75% 40%, rgba(155, 51, 147, 0.85), transparent 70%),
-    radial-gradient(ellipse 30% 18% at 95% 30%, rgba(21, 56, 67, 0.7), transparent 70%);
-  filter: blur(6px);
-  transform: skewX(-25deg) rotate(-6deg);
+  top: -16px;
+  left: 28.2%;
+  width: 72.8%;
+  max-width: none;
+  height: auto;
   pointer-events: none;
+}
+@media (min-width: 1700px) {
+  .hero__stroke { left: calc(50% - 371px); width: 1237px; }
 }
 .hero__inner {
   position: relative;
@@ -102,9 +108,9 @@ const features = [
 
 @media (max-width: 767px) {
   .hero__stroke {
+    top: 8px;
     left: 10%;
-    width: 120%;
-    height: 340px;
+    width: 130%;
   }
   .hero__features {
     grid-template-columns: 1fr;

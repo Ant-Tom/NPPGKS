@@ -18,8 +18,8 @@ useOrganizationSchema()
 <template>
   <div>
     <HomeHero />
-    <!-- TODO: видео и постер из макета (Main Frame) — положить в /public/video и /public/images/home -->
-    <HomeVideo />
+    <!-- TODO: сам ролик в макет не входит — положить в /public/video и передать :src -->
+    <HomeVideo poster="/images/home/video-poster.jpg" />
     <HomeAbout />
     <HomeProducts />
     <HomeAdvantages />
