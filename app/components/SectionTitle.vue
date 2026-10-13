@@ -4,7 +4,7 @@ defineProps<{ to?: string, tag?: string }>()
 </script>
 
 <template>
-  <component :is="tag || 'h2'" class="section-title h1">
+  <component :is="tag || 'h2'" v-reveal class="section-title h1">
     <NuxtLink v-if="to" :to="to" class="section-title__link">
       <slot />
       <IconArrow />

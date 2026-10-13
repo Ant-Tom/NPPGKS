@@ -15,14 +15,14 @@ defineProps<{
   <section class="banner">
     <MediaImage :src="category.banner" alt="" class="banner__bg" :eager="!counter" />
     <div class="container banner__inner">
-      <NuxtLink v-if="counter && to" :to="to" class="banner__counter" :aria-label="`${category.title} — подробнее`">
+      <NuxtLink v-if="counter && to" v-reveal :to="to" class="banner__counter" :aria-label="`${category.title} — подробнее`">
         {{ counter }} <IconArrow />
       </NuxtLink>
-      <component :is="tag || 'h2'" class="banner__title">
+      <component :is="tag || 'h2'" v-reveal="1" class="banner__title">
         <NuxtLink v-if="to" :to="to" class="banner__link">{{ category.title }}</NuxtLink>
         <template v-else>{{ category.title }}</template>
       </component>
-      <p class="banner__text">{{ category.text }}</p>
+      <p v-reveal="2" class="banner__text">{{ category.text }}</p>
     </div>
   </section>
 </template>
@@ -43,6 +43,14 @@ defineProps<{
   position: absolute;
   inset: 0;
   z-index: -2;
+}
+/* фото медленно «наезжает», когда баннер появляется на экране */
+.js .banner__bg {
+  transform: scale(1.08);
+  transition: transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.js .banner:has(.is-revealed) .banner__bg {
+  transform: none;
 }
 .banner::before {
   content: '';

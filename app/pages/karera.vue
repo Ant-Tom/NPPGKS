@@ -33,8 +33,8 @@ const shown = computed(() => (city.value ? vacancies.filter(v => v.city === city
     </section>
 
     <section class="container about">
-      <h2 class="h1 about__title">Карьера</h2>
-      <div class="about__cols">
+      <h2 v-reveal class="h1 about__title">Карьера</h2>
+      <div v-reveal="1" class="about__cols">
         <div>
           <p>
             НПП «ГКС» современная, динамичная инжиниринговая компания, осуществляющая комплекс работ для крупных
@@ -53,11 +53,12 @@ const shown = computed(() => (city.value ? vacancies.filter(v => v.city === city
     </section>
 
     <section class="container benefits">
-      <h2 class="h1 benefits__title">Преимущества работы у нас</h2>
+      <h2 v-reveal class="h1 benefits__title">Преимущества работы у нас</h2>
       <ul class="benefits__grid">
         <li
           v-for="(b, i) in benefits"
           :key="b.title"
+          v-reveal="i + 1"
           class="benefit"
           :class="`benefit--${i + 1}`"
           :style="{ backgroundImage: `url(${b.image})` }"
@@ -69,9 +70,9 @@ const shown = computed(() => (city.value ? vacancies.filter(v => v.city === city
     </section>
 
     <section class="container vacancies">
-      <h2 class="vacancies__title">Вакансии</h2>
+      <h2 v-reveal class="vacancies__title">Вакансии</h2>
 
-      <div class="filters" role="group" aria-label="Город">
+      <div v-reveal="1" class="filters" role="group" aria-label="Город">
         <button type="button" class="filter" :aria-pressed="city === null" @click="city = null">Все города</button>
         <button
           v-for="c in vacancyCities"
@@ -86,7 +87,7 @@ const shown = computed(() => (city.value ? vacancies.filter(v => v.city === city
       </div>
 
       <ul class="list">
-        <li v-for="v in shown" :key="v.title" class="vacancy">
+        <li v-for="(v, i) in shown" :key="v.title" v-reveal="i" class="vacancy">
           <details>
             <summary class="vacancy__head">
               <span>
@@ -148,7 +149,20 @@ const shown = computed(() => (city.value ? vacancies.filter(v => v.city === city
   position: absolute;
   inset: 0;
   z-index: -2;
+  animation: hero-zoom 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+@keyframes hero-zoom {
+  from { transform: scale(1.1); }
+}
+.hero__title span,
+.hero__text,
+.hero__btn {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero__title span:nth-child(1) { animation-delay: 0.2s; }
+.hero__title span:nth-child(2) { animation-delay: 0.35s; }
+.hero__text { animation-delay: 0.55s; }
+.hero__btn { animation-delay: 0.7s; }
 .hero::before {
   content: '';
   position: absolute;

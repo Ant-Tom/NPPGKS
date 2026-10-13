@@ -8,8 +8,8 @@ defineProps<{ title: string }>()
   <section class="page-head">
     <div class="container page-head__inner">
       <div class="page-head__main">
-        <h1 class="page-head__title">{{ title }}</h1>
-        <div v-if="$slots.note" class="page-head__cols">
+        <h1 v-reveal class="page-head__title">{{ title }}</h1>
+        <div v-if="$slots.note" v-reveal="1" class="page-head__cols">
           <div class="page-head__intro">
             <slot />
           </div>
@@ -17,7 +17,7 @@ defineProps<{ title: string }>()
             <slot name="note" />
           </div>
         </div>
-        <div v-else-if="$slots.default" class="page-head__intro">
+        <div v-else-if="$slots.default" v-reveal="1" class="page-head__intro">
           <slot />
         </div>
       </div>

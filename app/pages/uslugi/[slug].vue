@@ -35,7 +35,7 @@ const others = services.filter(s => s !== service)
     <section class="container others">
       <h2 class="h1 others__title">Другие услуги</h2>
       <ul class="others__grid">
-        <li v-for="s in others" :key="s.to">
+        <li v-for="(s, i) in others" :key="s.to" v-reveal="i">
           <TileCard :title="s.label" :to="s.to" heading :vw="22" />
         </li>
       </ul>

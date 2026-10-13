@@ -33,7 +33,7 @@ const items = [
 
     <ul class="products__list">
       <li v-for="item in items" :key="item.to" class="row">
-        <div class="container row__inner">
+        <div v-reveal class="container row__inner">
           <!-- коллаж из фото: большое + 2 маленьких + светлый квадрат, как в макете -->
           <div class="collage" :class="`collage--${item.layout}`" aria-hidden="true">
             <span class="collage__big"><MediaImage :src="item.photos[0]" :vw="15" /></span>
@@ -51,7 +51,7 @@ const items = [
       </li>
     </ul>
 
-    <div class="container products__more">
+    <div v-reveal class="container products__more">
       <AppButton to="/produkciya">Посмотреть все</AppButton>
     </div>
   </section>

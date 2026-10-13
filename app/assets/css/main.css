@@ -143,7 +143,46 @@ button { font: inherit; color: inherit; }
 
 :focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
 
+/* Появление при прокрутке (директива v-reveal) */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.7s ease-out var(--reveal-delay, 0ms),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+}
+.js [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+[data-reveal='1'] { --reveal-delay: 80ms; }
+[data-reveal='2'] { --reveal-delay: 160ms; }
+[data-reveal='3'] { --reveal-delay: 240ms; }
+[data-reveal='4'] { --reveal-delay: 320ms; }
+[data-reveal='5'] { --reveal-delay: 400ms; }
+[data-reveal='6'] { --reveal-delay: 480ms; }
+[data-reveal='7'] { --reveal-delay: 560ms; }
+[data-reveal='8'] { --reveal-delay: 640ms; }
+
+/* Смена страниц */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.25s ease;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(40px); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }

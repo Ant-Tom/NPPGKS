@@ -76,9 +76,18 @@ watch(open, (v) => {
   position: sticky;
   top: 0;
   z-index: 50;
+}
+/* Размытие фона — на псевдоэлементе: backdrop-filter на самой шапке сделал бы её
+   «рамкой» для position: fixed, и мобильное меню сжималось бы до высоты шапки */
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
+  pointer-events: none;
 }
 .header__bar {
   display: flex;
@@ -212,7 +221,12 @@ watch(open, (v) => {
 .header__burger span {
   height: 2px;
   background: var(--white);
+  transition: transform 0.25s, opacity 0.2s;
 }
+/* открытое меню — бургер превращается в крестик */
+.header__burger[aria-expanded='true'] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.header__burger[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+.header__burger[aria-expanded='true'] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 @media (max-width: 1279px) {
   .header__cta {
@@ -223,7 +237,7 @@ watch(open, (v) => {
 
 /* планшет и мобильные: бургер + полноэкранное меню */
 @media (max-width: 1023px) {
-  .header {
+  .header::before {
     background: rgba(255, 255, 255, 0.85);
   }
   .header__logo {

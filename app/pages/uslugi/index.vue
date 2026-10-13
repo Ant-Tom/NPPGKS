@@ -25,7 +25,7 @@ usePageSeo(
     <!-- TODO: фото услуг в макете пока не заданы (заглушки) — добавить поле image в data/site.ts -->
     <section class="container list">
       <ul class="list__grid">
-        <li v-for="s in services" :key="s.to">
+        <li v-for="(s, i) in services" :key="s.to" v-reveal="i % 3">
           <TileCard :title="s.label" :to="s.to" heading />
         </li>
       </ul>

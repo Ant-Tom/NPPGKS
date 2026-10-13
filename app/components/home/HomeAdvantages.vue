@@ -12,7 +12,7 @@ const cards = [
     <div class="container">
       <SectionTitle>Преимущества</SectionTitle>
       <ul class="adv__grid">
-        <li v-for="card in cards" :key="card.title" class="card">
+        <li v-for="(card, i) in cards" :key="card.title" v-reveal="i + 1" class="card">
           <MediaImage :src="card.image" :alt="card.title" :vw="30" />
           <h3 class="card__title h2">{{ card.title }}</h3>
         </li>

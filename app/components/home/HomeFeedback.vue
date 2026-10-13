@@ -11,7 +11,7 @@ const tiles = [
   <section class="fb">
     <div class="container">
       <SectionTitle>Обратная связь</SectionTitle>
-      <div class="fb__intro">
+      <div v-reveal="1" class="fb__intro">
         <p class="fb__lead">
           Мы специализируемся на услугах различных направлений — от проектирования инженерных систем и монтажа
           металлоконструкций до аренды спецтехники и поставок медицинского оборудования.
@@ -23,7 +23,7 @@ const tiles = [
       </div>
 
       <ul class="fb__grid">
-        <li v-for="t in tiles" :key="t.title">
+        <li v-for="(t, i) in tiles" :key="t.title" v-reveal="i + 1">
           <NuxtLink :to="t.to" class="tile" :class="`tile--${t.glow}`">
             <IconArrow class="tile__arrow" />
             <img :src="`/icons/tile-${t.icon}.svg`" alt="" width="60" height="60" class="tile__icon">

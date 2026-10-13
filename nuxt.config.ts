@@ -33,7 +33,11 @@ export default defineNuxtConfig({
         { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: '', href: '/fonts/pt-sans-cyrillic-400-normal.woff2' },
       ],
       meta: [{ name: 'theme-color', content: '#111111' }],
+      // признак включённого JS — от него зависят анимации появления (v-reveal)
+      script: [{ innerHTML: "document.documentElement.classList.add('js')", tagPosition: 'head' }],
     },
+    // плавная смена страниц
+    pageTransition: { name: 'page', mode: 'out-in' },
   },
 
   // Все страницы пререндерятся в статический HTML: максимум скорости и индексации

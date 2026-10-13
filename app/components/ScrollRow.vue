@@ -52,7 +52,7 @@ onBeforeUnmount(() => ro?.disconnect())
 </script>
 
 <template>
-  <div class="row">
+  <div v-reveal="1" class="row">
     <div
       ref="track"
       class="row__track"

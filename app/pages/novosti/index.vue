@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { news } from '~/data/news'
+import { news, newsUrl } from '~/data/news'
 
 usePageSeo(
   'Новости',
@@ -14,8 +14,8 @@ usePageSeo(
 
     <section class="container list">
       <ul class="list__grid">
-        <li v-for="n in news" :key="n.title" :class="{ 'is-wide': n.wide }">
-          <TileCard :title="n.title" :image="n.image" heading :vw="n.wide ? 44 : 22" tag="h2" class="card" />
+        <li v-for="(n, i) in news" :key="n.title" v-reveal="i % 4" :class="{ 'is-wide': n.wide }">
+          <TileCard :title="n.title" :image="n.image" :to="newsUrl(n)" heading :vw="n.wide ? 44 : 22" tag="h2" class="card" />
         </li>
       </ul>
     </section>

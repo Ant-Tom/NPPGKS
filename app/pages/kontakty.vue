@@ -38,14 +38,14 @@ const rows = (i: number) => {
 
     <template v-for="(o, i) in offices" :key="o.city">
       <section class="container office" :class="i === 0 ? 'office--green' : 'office--purple'">
-        <h2 class="office__title h1">
+        <h2 v-reveal class="office__title h1">
           <svg class="office__pin" width="44" height="55" viewBox="0 0 44 55" aria-hidden="true">
             <path d="M22 0C9.85 0 0 9.6 0 21.45 0 37.5 22 55 22 55s22-17.5 22-33.55C44 9.6 34.15 0 22 0Zm0 29a7.7 7.7 0 1 1 0-15.4A7.7 7.7 0 0 1 22 29Z" fill="currentColor" />
           </svg>
           {{ o.title }}
         </h2>
         <dl class="office__grid">
-          <div v-for="r in rows(i)" :key="r.label" class="item">
+          <div v-for="(r, j) in rows(i)" :key="r.label" v-reveal="j + 1" class="item">
             <dt class="item__label">
               <span class="item__icon"><img :src="`/icons/contacts/${r.icon}.png`" alt="" width="80" height="80"></span>
               {{ r.label }}
@@ -63,14 +63,16 @@ const rows = (i: number) => {
 
     <section id="feedback" class="feedback">
       <div class="container feedback__inner">
-        <div class="feedback__intro">
+        <div v-reveal class="feedback__intro">
           <h2 class="h1">Обратная связь</h2>
           <p>
             Хотите узнать подробнее об условиях сотрудничества? Оставьте заявку — проконсультируем, ответим на вопросы
             и подготовим индивидуальные условия сотрудничества.
           </p>
         </div>
-        <LeadForm :title="topic" :topic="topic" :message-label="topic === 'Заказать звонок' ? 'Удобное время для звонка' : 'Сообщение'" class="feedback__form" />
+        <div v-reveal="1" class="feedback__form">
+          <LeadForm :title="topic" :topic="topic" :message-label="topic === 'Заказать звонок' ? 'Удобное время для звонка' : 'Сообщение'" />
+        </div>
       </div>
     </section>
   </div>

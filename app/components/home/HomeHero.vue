@@ -47,6 +47,7 @@ const features = [
   padding: calc(var(--header-h) + clamp(48px, 9.3vw, 160px)) 0 clamp(56px, 8.4vw, 143px);
 }
 .hero__stroke {
+  animation: brush 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.15s both;
   position: absolute;
   top: -16px;
   left: 28.2%;
@@ -67,6 +68,21 @@ const features = [
   align-items: flex-start;
   font-weight: 700;
   text-transform: uppercase;
+}
+.hero__company,
+.hero__line,
+.hero__features li {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero__line { animation-delay: 0.25s; }
+.hero__line--shift { animation-delay: 0.4s; }
+.hero__features li { animation-name: fade-in; animation-duration: 0.8s; }
+.hero__features li:nth-child(1) { animation-delay: 0.8s; }
+.hero__features li:nth-child(2) { animation-delay: 0.95s; }
+.hero__features li:nth-child(3) { animation-delay: 1.1s; }
+@keyframes brush {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
 }
 .hero__company {
   margin-bottom: clamp(12px, 1.4vw, 24px);

@@ -24,7 +24,7 @@ const others = categories.filter(c => c !== category)
 
     <section v-if="category.items.length" class="container items">
       <ul class="items__grid">
-        <li v-for="p in category.items" :key="p.title">
+        <li v-for="(p, i) in category.items" :key="p.title" v-reveal="i % 3">
           <TileCard :title="p.title" :image="p.image" :vw="29" />
         </li>
       </ul>
@@ -33,7 +33,7 @@ const others = categories.filter(c => c !== category)
     <section class="container more">
       <h2 class="h1 more__title">Другие направления</h2>
       <ul class="more__list">
-        <li v-for="c in others" :key="c.slug">
+        <li v-for="(c, i) in others" :key="c.slug" v-reveal="i">
           <NuxtLink :to="categoryUrl(c)" class="more__link">{{ c.label }} <IconArrow /></NuxtLink>
         </li>
       </ul>
