@@ -1,5 +1,7 @@
 <script setup lang="ts">
-// Карта офисов: Яндекс.Карта (iframe, грузится лениво) + карточка выбранного офиса, как в макете.
+// Карта офисов: Яндекс.Карта + карточка выбранного офиса, как в макете.
+// iframe подключается, только когда карта появляется на экране: чужие скрипты и cookies
+// не тормозят загрузку страницы, пока до карты не доскроллили.
 // plain — только карта с метками, без вкладок и карточки (страница «Контакты»).
 import { offices, telHref } from '~/data/site'
 
@@ -14,11 +16,26 @@ const src = computed(() => {
   const [lat, lon] = [54.9, 51.2]
   return `https://yandex.ru/map-widget/v1/?ll=${lon},${lat}&z=7&pt=${pts}`
 })
+
+const root = ref<HTMLElement>()
+const visible = ref(false)
+let io: IntersectionObserver | undefined
+onMounted(() => {
+  if (!root.value || !('IntersectionObserver' in window)) return (visible.value = true)
+  io = new IntersectionObserver((entries) => {
+    if (entries.some(e => e.isIntersecting)) {
+      visible.value = true
+      io?.disconnect()
+    }
+  }, { rootMargin: '200px 0px' })
+  io.observe(root.value)
+})
+onBeforeUnmount(() => io?.disconnect())
 </script>
 
 <template>
-  <section class="map" :class="{ 'map--plain': plain }" aria-label="Офисы на карте">
-    <iframe class="map__frame" :src="src" title="НПП «ГКС» на карте" loading="lazy" allowfullscreen />
+  <section ref="root" class="map" :class="{ 'map--plain': plain }" aria-label="Офисы на карте">
+    <iframe v-if="visible" class="map__frame" :src="src" title="НПП «ГКС» на карте" loading="lazy" allowfullscreen />
 
     <div v-if="!plain" class="map__tabs" role="tablist" aria-label="Офисы">
       <button
@@ -66,7 +83,8 @@ const src = computed(() => {
   gap: 8px;
 }
 .map__tab {
-  padding: 6px 14px;
+  min-height: 44px;
+  padding: 6px 16px;
   font-size: 14px;
   background: var(--white);
   border: 0;
@@ -89,8 +107,10 @@ const src = computed(() => {
 }
 .map__close {
   position: absolute;
-  top: 6px;
-  right: 10px;
+  top: 0;
+  right: 0;
+  width: 44px;
+  height: 44px;
   font-size: 24px;
   line-height: 1;
   color: var(--grey);
@@ -113,6 +133,12 @@ const src = computed(() => {
   font-size: 18px;
   line-height: 30px;
   text-decoration: none;
+}
+@media (pointer: coarse) {
+  /* на сенсорных экранах — высота строки под палец */
+  .map__phone {
+    line-height: 44px;
+  }
 }
 .map__btn {
   display: inline-block;

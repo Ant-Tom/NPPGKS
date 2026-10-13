@@ -108,7 +108,7 @@ const photos = {
 <style scoped>
 .caps__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 25px;
   margin: 0;
   padding: 0;
@@ -180,14 +180,14 @@ const photos = {
 
 .cols {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 32px clamp(40px, 8.2vw, 140px);
   padding-block: var(--section-y);
   font-size: var(--fs-text3);
   line-height: 1.67;
 }
 .cols__muted {
-  color: var(--grey);
+  color: var(--grey-text);
 }
 
 .areas__title {
@@ -197,7 +197,7 @@ const photos = {
 }
 .mosaic {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-auto-rows: minmax(300px, 33.4vw);
 }
 @media (min-width: 1700px) {
@@ -243,14 +243,14 @@ const photos = {
 
 @media (max-width: 1023px) {
   .caps__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 16px;
   }
   .cols {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .mosaic {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-auto-rows: auto;
   }
   .tile--wide {
@@ -262,7 +262,7 @@ const photos = {
 }
 @media (max-width: 639px) {
   .caps__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .cap {
     min-height: 220px;

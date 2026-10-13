@@ -15,7 +15,7 @@ usePageSeo(
         автоматизации и имеет соответствующие сертификаты
       </p>
     </PageHead>
-    <LogoGrid :logos="partners" />
+    <LogoGrid :logos="partners" class="partners" />
 
     <section class="customers">
       <PageHead title="Заказчики">
@@ -31,8 +31,15 @@ usePageSeo(
 </template>
 
 <style scoped>
+/* макет: сетка партнёров с 514px, заголовок «Заказчики» через 151px после неё */
+.partners {
+  margin-top: clamp(0px, 2.29vw, 39px);
+}
 .customers {
-  margin-top: clamp(40px, 5.9vw, 100px);
+  margin-top: clamp(32px, 6.41vw, 109px);
+}
+.customers :deep(.page-head__intro) {
+  max-width: 734px;
 }
 .customers :deep(.page-head__title) {
   font-size: var(--fs-title);

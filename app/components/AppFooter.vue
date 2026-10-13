@@ -67,8 +67,10 @@ const year = new Date().getFullYear()
 </template>
 
 <style scoped>
+/* Размеры из макета: колонки прижаты влево с шагом 60px, «Продукция» 199px и «Услуги» 250px
+   переносят длинные названия; ссылки 14/20 с шагом 10px */
 .footer {
-  padding: 58px 0 36px;
+  padding: 49px 0 35px;
   background: var(--black);
   color: var(--white);
 }
@@ -80,7 +82,7 @@ const year = new Date().getFullYear()
 .footer__grid {
   display: grid;
   grid-template-columns: auto auto 199px 250px auto auto;
-  justify-content: space-between;
+  justify-content: start;
   gap: 40px 60px;
 }
 .footer__title {
@@ -91,10 +93,14 @@ const year = new Date().getFullYear()
   text-decoration: none;
 }
 .footer__col ul {
-  margin-top: 12px;
+  margin-top: 5px;
+}
+.footer__col li {
+  font-size: 14px;
+  line-height: 20px;
 }
 .footer__col li + li {
-  margin-top: 12px;
+  margin-top: 10px;
 }
 .footer__link {
   font-size: 14px;
@@ -107,7 +113,7 @@ const year = new Date().getFullYear()
   color: var(--green);
 }
 .footer__extra li + li {
-  margin-top: 10px;
+  margin-top: 9px;
 }
 .footer__icons {
   display: flex;
@@ -128,7 +134,7 @@ const year = new Date().getFullYear()
   display: flex;
   flex-wrap: wrap;
   gap: 8px 60px;
-  margin-top: 56px;
+  margin-top: 40px;
   font-size: 14px;
   line-height: 20px;
   opacity: 0.5;
@@ -136,13 +142,50 @@ const year = new Date().getFullYear()
 
 @media (max-width: 1279px) {
   .footer__grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+/* телефон: подразделы есть в меню-бургере, в футере — только разделы в две колонки,
+   у каждой ссылки высота не меньше 44px, чтобы попадать пальцем */
 @media (max-width: 767px) {
+  .footer {
+    padding-top: 40px;
+  }
   .footer__grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 24px;
+  }
+  .footer__col ul {
+    display: none;
+  }
+  .footer__title {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .footer__extra {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 24px;
+  }
+  .footer__extra li + li {
+    margin-top: 0;
+  }
+  .footer__icons {
+    grid-column: 1 / -1;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .footer__row {
+    gap: 12px;
+  }
+  .footer__icon img {
+    width: 44px;
+    height: 44px;
+  }
+  .footer__bottom {
+    margin-top: 32px;
   }
 }
 </style>

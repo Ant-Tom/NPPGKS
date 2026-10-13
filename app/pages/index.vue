@@ -20,10 +20,25 @@ useOrganizationSchema()
     <HomeHero />
     <!-- TODO: сам ролик в макет не входит — положить в /public/video и передать :src -->
     <HomeVideo poster="/images/home/video-poster.jpg" />
-    <HomeAbout />
-    <HomeProducts />
-    <HomeAdvantages />
+    <!-- фоновый логотип из макета: начинается в блоке «О компании» и уходит под «Преимущества» -->
+    <div class="deco">
+      <HomeAbout />
+      <LogoBg :top="77" class="home-logo" />
+      <HomeProducts class="home-layer" />
+      <HomeAdvantages class="home-layer" />
+    </div>
     <HomeFeedback />
     <OfficesMap />
   </div>
 </template>
+
+<style scoped>
+/* логотип поверх тёмного «О компании», но под «Продукцией» и «Преимуществами» — как в макете */
+.home-logo {
+  z-index: 0;
+}
+.home-layer {
+  position: relative;
+  z-index: 1;
+}
+</style>

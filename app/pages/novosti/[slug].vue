@@ -86,8 +86,10 @@ const next = pages[index + 1]
   line-height: 1.82;
 }
 .crumbs a {
-  color: var(--grey);
+  color: var(--grey-text);
   text-decoration: none;
+  padding-block: 8px;
+  margin-block: -8px;
 }
 .crumbs a:hover {
   color: var(--black);
@@ -113,7 +115,7 @@ const next = pages[index + 1]
 }
 .head__year {
   margin-top: 8px;
-  color: var(--grey);
+  color: var(--grey-text);
   font-size: 18px;
   line-height: 1.67;
 }
@@ -130,7 +132,7 @@ const next = pages[index + 1]
 
 .columns {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 24px clamp(40px, 4.7vw, 80px);
   padding-top: clamp(48px, 5.3vw, 90px);
 }
@@ -151,7 +153,7 @@ const next = pages[index + 1]
 }
 .gallery__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(8px, 0.95vw, 16px);
   margin: 0;
   padding: 0;
@@ -182,7 +184,7 @@ const next = pages[index + 1]
 
 .pager {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 24px;
   padding-block: var(--section-y);
 }
@@ -198,7 +200,7 @@ const next = pages[index + 1]
   text-align: right;
 }
 .pager__label {
-  color: var(--grey);
+  color: var(--grey-text);
   font-size: 18px;
 }
 .pager__title {
@@ -214,7 +216,7 @@ const next = pages[index + 1]
 @media (max-width: 1023px) {
   .head,
   .columns {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .head__cover {
     max-width: 600px;
@@ -225,14 +227,14 @@ const next = pages[index + 1]
 }
 @media (max-width: 639px) {
   .gallery__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-auto-flow: dense;
   }
   .gallery__item.is-wide {
     aspect-ratio: 2 / 1;
   }
   .pager {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .pager__link--next {
     text-align: left;

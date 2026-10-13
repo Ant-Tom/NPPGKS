@@ -37,20 +37,25 @@ withDefaults(defineProps<{
 .tile--link:hover :deep(.media) {
   transform: scale(1.04);
 }
+/* Плашка из макета: 484×165 на карточке 484×483, чёрный 20% + размытие фона (Figma blur 60 ≈ CSS 30px),
+   текст с отступом 30px; длинные подписи обрезаются многоточием на третьей строке, как в макете */
 .tile__caption {
   position: absolute;
   inset: auto 0 0;
-  min-height: 34%;
-  padding: clamp(16px, 1.4vw, 24px) clamp(18px, 1.8vw, 30px);
+  height: 34.2%;
+  min-height: 7.5em;
+  padding: clamp(10px, 1vw, 17px) clamp(14px, 1.3vw, 22px) 0 clamp(16px, 1.8vw, 30px);
+  overflow: hidden;
   color: var(--white);
   font-size: var(--fs-text);
   font-weight: 400;
   line-height: 1.82;
-  background: rgba(17, 17, 17, 0.3);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
 }
 .tile--heading .tile__caption {
+  min-height: 0;
   font-size: var(--fs-h2);
   font-weight: 700;
   line-height: 1.53;

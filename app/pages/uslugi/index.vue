@@ -8,8 +8,9 @@ usePageSeo(
 </script>
 
 <template>
-  <div>
-    <PageHead title="Услуги">
+  <div class="deco">
+    <LogoBg :top="-86" />
+    <PageHead title="Услуги" :intro-width="734">
       <p>
         Специализируемся на услугах различных направлений — от проектирования инженерных систем и монтажа
         металлоконструкций до аренды спецтехники и поставок медицинского оборудования.
@@ -26,7 +27,7 @@ usePageSeo(
     <section class="container list">
       <ul class="list__grid">
         <li v-for="(s, i) in services" :key="s.to" v-reveal="i % 3">
-          <TileCard :title="s.label" :to="s.to" heading />
+          <TileCard :title="s.label" :to="s.to" heading tag="h2" />
         </li>
       </ul>
     </section>
@@ -39,20 +40,20 @@ usePageSeo(
 }
 .list__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(12px, 1.3vw, 22px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.41vw, 24px);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 @media (max-width: 1023px) {
   .list__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 }
 @media (max-width: 639px) {
   .list__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 </style>

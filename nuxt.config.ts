@@ -1,4 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { typo } from './app/utils/typo'
+
+// Типограф для статического текста шаблонов: применяется при компиляции,
+// поэтому серверный и клиентский HTML совпадают (без расхождений гидратации)
+const typoTransform = (node: { type: number, content?: unknown }) => {
+  if (node.type === 2 /* NodeTypes.TEXT */ && typeof node.content === 'string') node.content = typo(node.content)
+}
+
 export default defineNuxtConfig({
   compatibilityDate: '2026-10-01',
   devtools: { enabled: true },
@@ -61,6 +69,10 @@ export default defineNuxtConfig({
     screens: { xs: 360, sm: 640, md: 768, lg: 1024, xl: 1280, xxl: 1440, '2xl': 1920 },
   },
 
+
+  vite: {
+    vue: { template: { compilerOptions: { nodeTransforms: [typoTransform] } } },
+  },
 
   experimental: { payloadExtraction: true },
 })

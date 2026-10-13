@@ -1,11 +1,12 @@
 <script setup lang="ts">
 // Шапка внутренней страницы: заголовок Title 1 + вводный текст (слот) + блок справа (слот aside).
 // Слот note — серый текст во второй колонке напротив вводного (Услуги, Контакты, Карьера).
-defineProps<{ title: string }>()
+// introWidth — ширина вводного текста из макета (обычно 680px)
+withDefaults(defineProps<{ title: string, introWidth?: number }>(), { introWidth: 680 })
 </script>
 
 <template>
-  <section class="page-head">
+  <section class="page-head" :class="{ 'page-head--intro': $slots.default }" :style="{ '--intro-w': `${introWidth}px` }">
     <div class="container page-head__inner">
       <div class="page-head__main">
         <h1 v-reveal class="page-head__title">{{ title }}</h1>
@@ -27,8 +28,14 @@ defineProps<{ title: string }>()
 </template>
 
 <style scoped>
+/* Отступы из макета (1700px): строка заголовка начинается через 42px после шапки,
+   вводный текст — через 29px после заголовка, контент — через 68px после текста.
+   Без вводного текста контент начинается через 52px после заголовка (310px от верха) */
 .page-head {
-  padding: clamp(40px, 5.9vw, 100px) 0 clamp(40px, 4.7vw, 80px);
+  padding: clamp(24px, 2.47vw, 42px) 0 clamp(28px, 3.06vw, 52px);
+}
+.page-head--intro {
+  padding-bottom: clamp(32px, 4vw, 68px);
 }
 .page-head__inner {
   display: flex;
@@ -37,23 +44,26 @@ defineProps<{ title: string }>()
 }
 .page-head__title {
   font-size: var(--fs-title);
-  line-height: 1.1;
+  line-height: 1.3;
   font-weight: 700;
   text-transform: uppercase;
   overflow-wrap: anywhere;
 }
 .page-head__intro {
-  max-width: 680px;
-  margin-top: clamp(24px, 2.6vw, 44px);
+  max-width: var(--intro-w, 680px);
+  margin-top: clamp(16px, 1.7vw, 29px);
+  font-size: var(--fs-text);
+  line-height: 1.82;
 }
 .page-head__main {
   flex: 1;
 }
 .page-head__cols {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px clamp(40px, 8.2vw, 140px);
-  margin-top: clamp(24px, 2.6vw, 44px);
+  grid-template-columns: minmax(0, var(--intro-w, 680px)) minmax(0, 680px);
+  justify-content: space-between;
+  gap: 24px clamp(32px, 5.06vw, 86px);
+  margin-top: clamp(16px, 1.7vw, 29px);
   font-size: var(--fs-text);
   line-height: 1.82;
 }
@@ -62,7 +72,7 @@ defineProps<{ title: string }>()
 }
 .page-head__note {
   max-width: 680px;
-  color: var(--grey);
+  color: var(--grey-text);
 }
 .page-head__intro :deep(p + p),
 .page-head__note :deep(p + p) {
@@ -73,7 +83,7 @@ defineProps<{ title: string }>()
     flex-direction: column;
   }
   .page-head__cols {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 </style>

@@ -13,7 +13,7 @@ const cards = [
       <SectionTitle>Преимущества</SectionTitle>
       <ul class="adv__grid">
         <li v-for="(card, i) in cards" :key="card.title" v-reveal="i + 1" class="card">
-          <MediaImage :src="card.image" :alt="card.title" :vw="30" />
+          <MediaImage :src="card.image" alt="" :vw="30" />
           <h3 class="card__title h2">{{ card.title }}</h3>
         </li>
       </ul>
@@ -25,7 +25,8 @@ const cards = [
 .adv {
   position: relative;
   overflow: hidden;
-  padding: var(--section-y) 0;
+  /* макет: заголовок через 85px от верха, 100px под карточками */
+  padding: clamp(48px, 5vw, 85px) 0 var(--section-y);
   color: var(--white);
   background:
     radial-gradient(ellipse 30% 55% at 8% 20%, rgba(155, 51, 147, 0.95), transparent 70%),
@@ -36,9 +37,9 @@ const cards = [
 }
 .adv__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 40px;
-  margin: clamp(32px, 4.1vw, 70px) 0 0;
+  margin: clamp(32px, 3.35vw, 57px) 0 0;
   padding: 0;
   list-style: none;
 }
@@ -47,7 +48,7 @@ const cards = [
   aspect-ratio: 1;
   overflow: hidden;
   background: var(--black);
-  filter: drop-shadow(0 0 20px rgba(27, 28, 33, 0.2));
+  box-shadow: var(--shadow);
 }
 .card :deep(.media) {
   height: 74%;
@@ -68,13 +69,13 @@ const cards = [
 }
 @media (max-width: 1023px) {
   .adv__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 24px;
   }
 }
 @media (max-width: 639px) {
   .adv__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .card {
     aspect-ratio: 4 / 3;

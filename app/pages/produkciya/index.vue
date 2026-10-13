@@ -26,6 +26,6 @@ usePageSeo(
   padding: 30px 0 0;
 }
 .category:not(:last-child) {
-  padding-bottom: clamp(56px, 7vw, 120px);
+  padding-bottom: clamp(56px, 7.06vw, 120px);
 }
 </style>

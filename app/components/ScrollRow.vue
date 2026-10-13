@@ -1,17 +1,7 @@
 <script setup lang="ts">
-// Горизонтальная лента карточек: прокрутка свайпом/колесом/перетаскиванием,
-// снизу — индикатор прокрутки, как в макете. Лента выходит за правый край контейнера.
+// Горизонтальная лента карточек: прокрутка свайпом, колесом, перетаскиванием мышью и клавишами.
+// Как в макете, лента выходит за правый край — обрезанная карточка подсказывает, что её можно листать.
 const track = ref<HTMLElement>()
-const thumb = reactive({ left: 0, width: 100 })
-const scrollable = ref(false)
-
-function update() {
-  const el = track.value
-  if (!el) return
-  scrollable.value = el.scrollWidth > el.clientWidth + 4
-  thumb.width = (el.clientWidth / el.scrollWidth) * 100
-  thumb.left = (el.scrollLeft / el.scrollWidth) * 100
-}
 
 // перетаскивание мышью (на тач-устройствах работает нативная прокрутка)
 let drag: { x: number, left: number } | null = null
@@ -41,14 +31,6 @@ function click(e: MouseEvent) {
     moved = false
   }
 }
-
-let ro: ResizeObserver | undefined
-onMounted(() => {
-  update()
-  ro = new ResizeObserver(update)
-  if (track.value) ro.observe(track.value)
-})
-onBeforeUnmount(() => ro?.disconnect())
 </script>
 
 <template>
@@ -57,7 +39,9 @@ onBeforeUnmount(() => ro?.disconnect())
       ref="track"
       class="row__track"
       :class="{ 'is-dragging': dragging }"
-      @scroll.passive="update"
+      tabindex="0"
+      role="region"
+      aria-label="Карточки — листаются по горизонтали"
       @pointerdown="down"
       @pointermove="move"
       @pointerup="up"
@@ -65,11 +49,6 @@ onBeforeUnmount(() => ro?.disconnect())
       @click.capture="click"
     >
       <slot />
-    </div>
-    <div v-show="scrollable" class="container">
-      <div class="row__bar" aria-hidden="true">
-        <span class="row__thumb" :style="{ left: thumb.left + '%', width: thumb.width + '%' }" />
-      </div>
     </div>
   </div>
 </template>
@@ -79,11 +58,11 @@ onBeforeUnmount(() => ro?.disconnect())
   --edge: max(var(--gutter), calc((100vw - var(--container)) / 2));
   display: grid;
   grid-auto-flow: column;
-  --gap: clamp(12px, 1.3vw, 22px);
+  --gap: clamp(12px, 1.41vw, 24px);
   grid-auto-columns: calc((min(100vw - var(--edge) * 2, var(--container)) - var(--gap) * 2) / 3);
   gap: var(--gap);
   padding: 40px var(--edge);
-  margin: -40px 0 -20px;
+  margin: -40px 0;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: var(--edge);
@@ -105,18 +84,5 @@ onBeforeUnmount(() => ro?.disconnect())
   .row__track {
     grid-auto-columns: min(420px, 75vw);
   }
-}
-.row__bar {
-  position: relative;
-  height: 3px;
-  margin-top: 20px;
-  background: #d9d9d9;
-}
-.row__thumb {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  background: var(--grey);
-  transition: left 0.1s linear;
 }
 </style>

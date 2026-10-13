@@ -48,19 +48,21 @@ const others = categories.filter(c => c !== category)
   flex-wrap: wrap;
   gap: 8px;
   padding-block: 24px;
-  color: var(--grey);
+  color: var(--grey-text);
   font-size: var(--fs-caption);
 }
 .crumbs a {
   color: inherit;
+  padding-block: 12px;
+  margin-block: -12px;
 }
 .items {
   padding-top: clamp(32px, 3.5vw, 60px);
 }
 .items__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(12px, 1.3vw, 22px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.41vw, 24px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -101,12 +103,12 @@ const others = categories.filter(c => c !== category)
 }
 @media (max-width: 1023px) {
   .items__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 }
 @media (max-width: 639px) {
   .items__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 </style>

@@ -1,6 +1,7 @@
 // Каталог продукции: 6 направлений и позиции в каждом (макет «Продукция»).
 // Фото — /public/images/products/. Страницы отдельных позиций в макет не входят,
 // поэтому карточки пока не ссылаются никуда.
+import { typoDeep } from '~/utils/typo'
 
 export interface Product {
   title: string
@@ -20,7 +21,7 @@ export interface ProductCategory {
 
 const img = (name: string) => `/images/products/${name}.jpg`
 
-export const categories: ProductCategory[] = [
+export const categories: ProductCategory[] = typoDeep([
   {
     slug: 'sistemy-izmerenij',
     label: 'Системы измерений количества и показателей качества',
@@ -99,6 +100,6 @@ export const categories: ProductCategory[] = [
     // в макете у этого направления карточек нет
     items: [],
   },
-]
+])
 
 export const categoryUrl = (c: ProductCategory) => `/produkciya/${c.slug}`

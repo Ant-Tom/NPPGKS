@@ -16,7 +16,7 @@ defineProps<{ logos: Logo[] }>()
 .logos {
   overflow: hidden;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
@@ -43,12 +43,12 @@ defineProps<{ logos: Logo[] }>()
 }
 @media (max-width: 1023px) {
   .logos {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 @media (max-width: 639px) {
   .logos {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .logos__cell {
     padding: 14%;

@@ -10,17 +10,19 @@ const features = [
 <template>
   <section class="hero">
     <!-- мазок кистью (зелёный → синий → фиолетовый) — картинка из макета -->
-    <NuxtImg
-      src="/images/home/hero-stroke.png"
-      alt=""
-      width="1237"
-      height="632"
-      sizes="xs:120vw md:100vw lg:73vw"
-      format="webp"
-      fetchpriority="high"
-      class="hero__stroke"
-      aria-hidden="true"
-    />
+    <div class="hero__stroke" aria-hidden="true">
+      <NuxtImg
+        src="/images/home/hero-stroke.png"
+        alt=""
+        width="1237"
+        height="632"
+        sizes="xs:120vw md:100vw lg:73vw"
+        format="webp"
+        fetchpriority="high"
+      />
+      <!-- «кисть»: белая шторка уезжает вправо — анимация только transform, без перерисовки картинки -->
+      <span class="hero__wipe" />
+    </div>
 
     <div class="container hero__inner">
       <h1 class="hero__title">
@@ -44,20 +46,21 @@ const features = [
   position: relative;
   overflow: hidden;
   margin-top: calc(var(--header-h) * -1);
-  padding: calc(var(--header-h) + clamp(48px, 9.3vw, 160px)) 0 clamp(56px, 8.4vw, 143px);
+  /* вертикаль макета: подзаголовок на 246px, подложки строк на 298 и 443px, иконки на 638px, видео с 872px */
+  padding: calc(var(--header-h) + clamp(40px, 8.65vw, 147px)) 0 clamp(56px, 7.59vw, 129px);
 }
 .hero__stroke {
-  animation: brush 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.15s both;
   position: absolute;
-  top: -16px;
-  left: 28.2%;
+  overflow: hidden;
+  top: -26px;
+  left: 30%;
   width: 72.8%;
   max-width: none;
   height: auto;
   pointer-events: none;
 }
 @media (min-width: 1700px) {
-  .hero__stroke { left: calc(50% - 371px); width: 1237px; }
+  .hero__stroke { left: calc(50% - 340px); width: 1237px; }
 }
 .hero__inner {
   position: relative;
@@ -80,40 +83,57 @@ const features = [
 .hero__features li:nth-child(1) { animation-delay: 0.8s; }
 .hero__features li:nth-child(2) { animation-delay: 0.95s; }
 .hero__features li:nth-child(3) { animation-delay: 1.1s; }
+.hero__stroke img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.hero__wipe {
+  position: absolute;
+  inset: 0 -30% 0 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0, var(--white) 22%);
+  transform: translateX(105%);
+  animation: brush 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.15s both;
+  will-change: transform;
+}
 @keyframes brush {
-  from { clip-path: inset(0 100% 0 0); }
-  to { clip-path: inset(0 0 0 0); }
+  from { transform: translateX(-25%); }
 }
 .hero__company {
-  margin-bottom: clamp(12px, 1.4vw, 24px);
-  font-size: var(--fs-h1);
+  margin-bottom: clamp(6px, 0.7vw, 12px);
+  font-size: clamp(24px, 2.41vw, 41px);
   line-height: 1.3;
   font-weight: 400;
   color: var(--grey);
 }
+/* строка на белой подложке: заглавные ~95px (кегль 136), поля подложки 12px, подложка 120px.
+   line-height = высота заглавных, отступы подобраны так, чтобы буквы стояли ровно по центру */
 .hero__line {
-  padding: 0.06em 0.12em 0;
-  font-size: var(--fs-title);
-  line-height: 1.2;
+  margin-left: -0.087em;
+  padding: 0.066em 0.087em 0.104em;
+  font-size: clamp(40px, 8vw, 136px);
+  line-height: 0.7;
   background: var(--white);
 }
 .hero__line--shift {
-  margin-left: clamp(0px, 8.2vw, 139px);
-  margin-top: clamp(4px, 1vw, 16px);
+  margin-left: clamp(0px, 7.53vw, 128px);
+  margin-top: clamp(8px, 1.47vw, 25px);
 }
+/* преимущества стоят в макете на 239, 639 и 1030px — колонки 400 и 391px */
 .hero__features {
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: minmax(0, 400px) minmax(0, 391px) auto;
   justify-content: start;
-  gap: 24px clamp(40px, 14vw, 240px);
-  margin: clamp(48px, 4.2vw, 70px) 0 0;
-  padding: 0 0 0 clamp(0px, 8.2vw, 139px);
+  gap: 24px 0;
+  margin: clamp(40px, 4.41vw, 75px) 0 0;
+  padding: 0 0 0 clamp(0px, 8.18vw, 139px);
   list-style: none;
 }
 .hero__features li {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 9px;
+  padding-right: 24px;
 }
 .hero__features img {
   height: 56px;
@@ -129,12 +149,13 @@ const features = [
     width: 130%;
   }
   .hero__features {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding-left: 0;
   }
   .hero__features li {
     flex-direction: row;
     align-items: center;
+    gap: 16px;
   }
   .hero__features img {
     width: 48px;

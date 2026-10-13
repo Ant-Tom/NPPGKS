@@ -184,19 +184,20 @@ const shown = computed(() => (city.value ? vacancies.filter(v => v.city === city
 }
 .hero__text {
   max-width: 720px;
-  margin-top: 16px;
+  margin-top: 0;
   font-size: var(--fs-text);
   line-height: 1.82;
 }
 .hero__btn {
-  margin-top: clamp(28px, 2.6vw, 44px);
+  margin-top: clamp(24px, 2.06vw, 35px);
   height: 78px;
   min-width: 356px;
   font-size: clamp(18px, 1.4vw, 24px);
 }
 
+/* макет: «Карьера» через 86px после первого экрана, карточки преимуществ — через 167px после текста */
 .about {
-  padding-block: var(--section-y);
+  padding-block: clamp(48px, 5.06vw, 86px) var(--section-y);
   font-size: var(--fs-text);
   line-height: 1.82;
 }
@@ -205,7 +206,7 @@ const shown = computed(() => (city.value ? vacancies.filter(v => v.city === city
 }
 .about__cols {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 24px clamp(40px, 8.2vw, 140px);
   margin-top: clamp(24px, 2.6vw, 44px);
 }
@@ -213,22 +214,22 @@ const shown = computed(() => (city.value ? vacancies.filter(v => v.city === city
   margin-top: 12px;
 }
 .about__note {
-  color: var(--grey);
+  color: var(--grey-text);
 }
 
 .benefits {
   position: relative;
-  padding-block: var(--section-y);
+  padding-block: clamp(40px, 3.94vw, 67px) clamp(64px, 10.8vw, 183px);
 }
 .benefits__title {
   position: absolute;
   width: calc((100% - var(--gutter) * 2) / 3 - 40px);
-  padding-top: 20px;
+  padding-top: 27px;
   color: var(--grey);
 }
 .benefits__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
@@ -239,7 +240,7 @@ const shown = computed(() => (city.value ? vacancies.filter(v => v.city === city
   justify-content: space-between;
   gap: 32px;
   aspect-ratio: 1;
-  padding: clamp(20px, 1.8vw, 30px) clamp(20px, 2.4vw, 40px) clamp(32px, 5.9vw, 100px);
+  padding: clamp(20px, 1.59vw, 27px) clamp(20px, 2.4vw, 40px) clamp(32px, 6.47vw, 110px);
   color: var(--white);
   background: var(--blue) center / cover no-repeat;
   box-shadow: var(--shadow);
@@ -255,19 +256,19 @@ const shown = computed(() => (city.value ? vacancies.filter(v => v.city === city
 .benefit--5 { grid-area: 3 / 2; }
 
 .vacancies {
-  padding-block: var(--section-y);
+  padding-block: 0 var(--section-y);
 }
 .vacancies__title {
   font-size: var(--fs-title);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.3;
   text-transform: uppercase;
 }
 .filters {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: clamp(24px, 2.4vw, 40px) 0 clamp(24px, 2.4vw, 40px);
+  margin: clamp(20px, 1.76vw, 30px) 0 clamp(20px, 2.06vw, 35px);
 }
 .filter {
   min-height: 60px;
@@ -297,7 +298,7 @@ const shown = computed(() => (city.value ? vacancies.filter(v => v.city === city
   align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
-  padding: clamp(24px, 2.4vw, 40px) 0;
+  padding: clamp(24px, 2.12vw, 36px) 0 clamp(24px, 2.18vw, 37px);
   list-style: none;
   cursor: pointer;
 }
@@ -322,7 +323,7 @@ const shown = computed(() => (city.value ? vacancies.filter(v => v.city === city
   margin-top: 8px;
   font-size: 18px;
   font-weight: 700;
-  color: var(--grey);
+  color: var(--grey-text);
 }
 .vacancy__chevron {
   flex-shrink: 0;
@@ -348,7 +349,7 @@ details[open] .vacancy__chevron {
 }
 .vacancy__cols {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 24px clamp(40px, 4.7vw, 80px);
 }
 .vacancy__label {
@@ -361,10 +362,11 @@ details[open] .vacancy__chevron {
   padding-left: 1.2em;
 }
 .vacancy__empty {
-  color: var(--grey);
+  color: var(--grey-text);
 }
 .vacancy__apply {
-  margin-top: 24px;
+  min-height: 44px;
+  margin-top: 16px;
   padding: 0;
   font-size: 18px;
   font-weight: 700;
@@ -377,29 +379,36 @@ details[open] .vacancy__chevron {
 }
 .list__empty {
   padding: 32px 0;
-  color: var(--grey);
+  color: var(--grey-text);
   font-size: var(--fs-text);
 }
 
-@media (max-width: 1023px) {
-  .about__cols,
-  .vacancy__cols {
-    grid-template-columns: 1fr;
-  }
+/* планшет: две колонки вместо «шахматки» 3×3 */
+@media (max-width: 1279px) {
   .benefits__title {
     position: static;
     width: auto;
     margin-bottom: 32px;
   }
   .benefits__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
   }
   .benefit--1, .benefit--2, .benefit--3, .benefit--4, .benefit--5 { grid-area: auto; }
+  .benefit {
+    aspect-ratio: auto;
+    min-height: 360px;
+  }
+}
+@media (max-width: 1023px) {
+  .about__cols,
+  .vacancy__cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 @media (max-width: 639px) {
   .benefits__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .benefit {
     aspect-ratio: auto;

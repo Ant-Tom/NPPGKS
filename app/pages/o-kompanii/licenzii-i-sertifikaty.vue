@@ -8,7 +8,8 @@ usePageSeo(
 </script>
 
 <template>
-  <div>
+  <div class="deco">
+    <LogoBg :top="-86" />
     <PageHead title="Лицензии и сертификаты">
       <p>НПП «ГКС» обладает необходимыми лицензиями и сертификатами для выполнения полного комплекса инжиниринговых работ</p>
     </PageHead>
@@ -28,28 +29,39 @@ usePageSeo(
 </template>
 
 <style scoped>
+/* Макет: группы через 60px, у каждой 30px до тонкой серой линии (у последней линии нет);
+   заголовок по центру миниатюр, миниатюры 60×60 по 8 в ряд прижаты вправо */
 .docs {
+  /* в макете список начинается на 40px ниже обычного (475px от верха) */
+  margin-top: clamp(0px, 2.35vw, 40px);
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: clamp(32px, 3.53vw, 60px);
   padding-bottom: var(--section-y);
 }
 .group {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 24px 40px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid #d1d2d9;
-  box-shadow: inset 0 1px 0 var(--light);
+  padding-bottom: 30px;
+  border-bottom: 0.5px solid var(--grey);
+}
+.group:last-child {
+  border-bottom: 0;
 }
 .group__text {
-  max-width: 680px;
+  max-width: 700px;
+}
+/* «обрезка» межстрочных полей: выравнивание идёт по буквам, как в макете */
+.group .h2 {
+  margin: -0.44em 0 -0.4em;
 }
 .group__note {
-  margin-top: 16px;
-  font-size: var(--fs-text3);
-  line-height: 1.67;
-  color: var(--grey);
+  margin: 22px 0 -0.54em;
+  font-size: var(--fs-text);
+  line-height: 1.82;
+  color: var(--grey-text);
 }
 .group__thumbs {
   display: grid;

@@ -37,7 +37,7 @@ const rows = (i: number) => {
     </PageHead>
 
     <template v-for="(o, i) in offices" :key="o.city">
-      <section class="container office" :class="i === 0 ? 'office--green' : 'office--purple'">
+      <section class="container office" :class="i === 0 ? 'office--green office--first' : 'office--purple'">
         <h2 v-reveal class="office__title h1">
           <svg class="office__pin" width="44" height="55" viewBox="0 0 44 55" aria-hidden="true">
             <path d="M22 0C9.85 0 0 9.6 0 21.45 0 37.5 22 55 22 55s22-17.5 22-33.55C44 9.6 34.15 0 22 0Zm0 29a7.7 7.7 0 1 1 0-15.4A7.7 7.7 0 0 1 22 29Z" fill="currentColor" />
@@ -79,10 +79,15 @@ const rows = (i: number) => {
 </template>
 
 <style scoped>
+/* макет: заголовок офиса через 68px после шапки страницы (98px после карты), карта — через 87px после адресов;
+   колонки с шагом 345px */
 .office {
-  padding-block: clamp(48px, 5.9vw, 100px);
+  padding-block: clamp(48px, 5.76vw, 98px) clamp(48px, 5.12vw, 87px);
   font-size: var(--fs-text);
   line-height: 1.82;
+}
+.office--first {
+  padding-top: clamp(32px, 4vw, 68px);
 }
 .office--green { --accent: var(--green); }
 .office--purple { --accent: var(--purple); }
@@ -99,12 +104,13 @@ const rows = (i: number) => {
 }
 .office__grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 32px 24px;
-  margin: clamp(32px, 4.1vw, 70px) 0 0;
+  grid-template-columns: repeat(4, minmax(0, 23%)) minmax(0, 1fr);
+  gap: 32px 0;
+  margin: clamp(32px, 3.88vw, 66px) 0 0;
 }
 .item {
   min-width: 0;
+  padding-right: 24px;
 }
 .item__icon {
   display: flex;
@@ -112,13 +118,14 @@ const rows = (i: number) => {
   justify-content: center;
   width: 80px;
   height: 80px;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   background: var(--accent);
 }
 .item__label {
   display: flex;
   flex-direction: column;
-  font-size: clamp(18px, 1.4vw, 24px);
+  line-height: 1.5;
+  font-size: clamp(18px, 1.41vw, 24px);
   font-weight: 700;
 }
 .item__line {
@@ -140,7 +147,7 @@ const rows = (i: number) => {
 }
 .feedback__inner {
   display: grid;
-  grid-template-columns: 1fr minmax(0, 600px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 600px);
   gap: 40px clamp(40px, 8.2vw, 140px);
 }
 .feedback__intro p {
@@ -153,17 +160,17 @@ const rows = (i: number) => {
 
 @media (max-width: 1279px) {
   .office__grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 @media (max-width: 1023px) {
   .feedback__inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (max-width: 639px) {
   .office__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
   .item__icon {
     width: 60px;

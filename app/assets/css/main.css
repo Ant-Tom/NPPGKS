@@ -38,6 +38,8 @@
   --black: #111111;
   --green: #a7af39;
   --grey: #808285;
+  /* серый для мелкого текста на белом: #808285 даёт контраст 3,85:1, а нужно 4,5:1 (WCAG AA) */
+  --grey-text: #737578;
   --purple: #9b3393;
   --blue: #153843;
   --light: #eceef5;
@@ -85,6 +87,8 @@ img, picture, svg, video { display: block; max-width: 100%; }
 
 h1, h2, h3, h4, p { margin: 0; }
 
+h1, h2, h3, h4 { overflow-wrap: break-word; }
+
 a { color: inherit; }
 
 button { font: inherit; color: inherit; }
@@ -119,6 +123,13 @@ button { font: inherit; color: inherit; }
 }
 
 .caption { font-size: var(--fs-caption); line-height: 20px; }
+
+/* Блок с декоративным фоном (LogoBg): фон уходит под содержимое и обрезается по краям */
+.deco {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+}
 
 .visually-hidden {
   position: absolute !important;

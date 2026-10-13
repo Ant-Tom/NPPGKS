@@ -52,7 +52,7 @@ watch(open, (v) => {
         <NuxtLink to="/poisk" class="header__search" aria-label="Поиск по сайту">
           <img src="/icons/search.svg" alt="" width="20" height="20">
         </NuxtLink>
-        <NuxtLink to="/kontakty#feedback" class="header__cta">
+        <NuxtLink to="/kontakty#feedback" class="header__cta" aria-label="Свяжитесь с нами">
           <img src="/icons/chat.svg" alt="" width="29" height="27">
           <span>Свяжитесь с нами</span>
         </NuxtLink>
@@ -241,7 +241,9 @@ watch(open, (v) => {
     background: rgba(255, 255, 255, 0.85);
   }
   .header__logo {
-    display: block;
+    display: flex;
+    align-items: center;
+    align-self: stretch;
     margin-right: auto;
   }
   .header__nav {

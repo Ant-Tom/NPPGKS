@@ -28,9 +28,10 @@ usePageSeo(
 }
 .list__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: clamp(320px, 30vw, 510px);
-  gap: clamp(10px, 1.2vw, 20px);
+  /* макет: колонки 362px с промежутком 18px, ряды 512px */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: clamp(320px, 30.1vw, 512px);
+  gap: clamp(10px, 1.06vw, 18px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -44,13 +45,13 @@ usePageSeo(
 }
 @media (max-width: 1023px) {
   .list__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-auto-rows: clamp(280px, 55vw, 460px);
   }
 }
 @media (max-width: 639px) {
   .list__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-auto-rows: auto;
   }
   .is-wide {

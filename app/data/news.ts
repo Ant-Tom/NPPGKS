@@ -1,5 +1,6 @@
 // Новости (макеты «Новости» и «Новость 1–10»).
 // Фото: /public/images/news/<slug>.jpg — карточка в списке, /public/images/news/<slug>/ — обложка и галерея.
+import { typoDeep } from '~/utils/typo'
 
 export interface NewsSection {
   title?: string
@@ -41,7 +42,7 @@ const galleryA = (slug: string, files: string[]): GalleryPhoto[] =>
 const galleryB = (slug: string, files: string[]): GalleryPhoto[] =>
   files.map((f, i) => ({ src: img(`${slug}/${f}`), wide: i === 1 || i === 2 }))
 
-export const news: NewsItem[] = [
+export const news: NewsItem[] = typoDeep([
   {
     title: 'НПП «ГКС» прошла аудит ПАО «Транснефть»',
     image: img('transneft-audit'),
@@ -192,6 +193,6 @@ export const news: NewsItem[] = [
     gallery: ['cover', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']
       .map((f, i) => ({ src: img(`kubok-mini-futbol-2023/${f}`), wide: [1, 5, 11, 15].includes(i) })),
   },
-]
+])
 
 export const newsUrl = (n: NewsItem) => (n.slug ? `/novosti/${n.slug}` : undefined)

@@ -1,4 +1,6 @@
-<!-- Видео о компании с собственными контролами (play/pause, прогресс, время, звук) -->
+<!-- Видео о компании с собственными контролами (play/pause, прогресс, время, звук).
+     Постер — обычная адаптивная картинка (WebP + srcset) поверх видео: <video poster> не умеет
+     отдавать уменьшенные версии, а это самый крупный элемент первого экрана на телефонах (LCP) -->
 <script setup lang="ts">
 const props = defineProps<{ src?: string, poster?: string }>()
 
@@ -34,7 +36,6 @@ function seek(e: MouseEvent) {
       ref="video"
       class="video__media"
       :src="src"
-      :poster="poster"
       :muted="muted"
       playsinline
       preload="none"
@@ -43,7 +44,8 @@ function seek(e: MouseEvent) {
       @timeupdate="current = video!.currentTime"
       @loadedmetadata="duration = video!.duration"
     />
-    <div v-if="!poster" class="video__placeholder" aria-hidden="true" />
+    <MediaImage v-if="poster" v-show="!playing && !current" :src="poster" alt="" class="video__poster" eager />
+    <div v-else class="video__placeholder" aria-hidden="true" />
 
     <div class="video__bar">
       <div class="container video__controls">
@@ -74,6 +76,7 @@ function seek(e: MouseEvent) {
   background: var(--black);
 }
 .video__media,
+.video__poster,
 .video__placeholder {
   position: absolute;
   inset: 0;
@@ -99,6 +102,10 @@ function seek(e: MouseEvent) {
 }
 .video__btn {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0;
   background: none;
   border: 0;

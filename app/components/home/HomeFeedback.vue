@@ -36,26 +36,27 @@ const tiles = [
 </template>
 
 <style scoped>
+/* макет: заголовок через 145px после «Преимуществ», текст 22/40 через 34px, плитки через 88px */
 .fb {
-  padding: var(--section-y) 0;
+  padding: clamp(64px, 8.53vw, 145px) 0 var(--section-y);
 }
 .fb__intro {
   display: grid;
-  grid-template-columns: 700px 680px;
+  grid-template-columns: minmax(0, 700px) minmax(0, 680px);
   justify-content: space-between;
   gap: 24px 40px;
-  margin-top: 60px;
-  font-size: 18px;
-  line-height: 1.67;
+  margin-top: clamp(20px, 2vw, 34px);
+  font-size: var(--fs-text);
+  line-height: 1.82;
 }
 .fb__note {
-  color: var(--grey);
+  color: var(--grey-text);
 }
 .fb__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 25px;
-  margin: clamp(40px, 5.9vw, 100px) 0 0;
+  margin: clamp(40px, 5.18vw, 88px) 0 0;
   padding: 0;
   list-style: none;
 }
@@ -64,10 +65,10 @@ const tiles = [
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 40px;
+  gap: 29px;
   height: 100%;
   min-height: 336px;
-  padding: 40px;
+  padding: 40px 40px 27px;
   overflow: hidden;
   color: var(--white);
   text-decoration: none;
@@ -106,7 +107,7 @@ const tiles = [
 }
 @media (max-width: 1500px) {
   .fb__intro {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
   .tile__title {
     white-space: normal;
@@ -114,7 +115,7 @@ const tiles = [
 }
 @media (max-width: 1023px) {
   .fb__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .tile {
     min-height: 220px;
@@ -122,7 +123,7 @@ const tiles = [
 }
 @media (max-width: 767px) {
   .fb__intro {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     margin-top: 32px;
   }
   .tile {

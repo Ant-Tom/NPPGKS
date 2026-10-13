@@ -1,4 +1,5 @@
 // Раздел «Карьера»: преимущества работы и вакансии (макет «Карьера»).
+import { typoDeep } from '~/utils/typo'
 
 export interface Benefit {
   title: string
@@ -7,7 +8,7 @@ export interface Benefit {
   image: string
 }
 
-export const benefits: Benefit[] = [
+export const benefits: Benefit[] = typoDeep([
   {
     title: 'Карьерный рост',
     text: 'Наши сотрудники имеют возможность развиваться внутри компании, проходя обучения и повышая квалификацию',
@@ -33,7 +34,7 @@ export const benefits: Benefit[] = [
     text: 'Компания предоставляет сотрудникам различные социальные льготы',
     image: '/images/career/benefit-5.jpg',
   },
-]
+])
 
 export interface Vacancy {
   title: string
@@ -45,7 +46,7 @@ export interface Vacancy {
 }
 
 // TODO: в макете остальные вакансии — заглушки «Название»; ссылки на hh.ru не указаны
-export const vacancies: Vacancy[] = [
+export const vacancies: Vacancy[] = typoDeep([
   { title: 'Инженер-энергетик', city: 'Казань' },
   {
     title: 'Электромонтёр по эксплуатации зданий',
@@ -61,6 +62,6 @@ export const vacancies: Vacancy[] = [
       'Исполнительность, внимательность, ответственность.',
     ],
   },
-]
+])
 
 export const vacancyCities = ['Казань', 'Бугульма'] as const

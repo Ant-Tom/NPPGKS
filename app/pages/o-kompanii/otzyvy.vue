@@ -29,12 +29,13 @@ usePageSeo(
 </template>
 
 <style scoped>
+/* макет: сканы 362×512 с шагом 18px, подпись 22px через 20px под сканом, 90px до футера */
 .reviews {
-  padding-bottom: var(--section-y);
+  padding-bottom: clamp(56px, 5.3vw, 90px);
 }
 .reviews__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 18px;
   margin: 0;
   padding: 0;
@@ -42,7 +43,7 @@ usePageSeo(
 }
 .review__scan {
   display: block;
-  aspect-ratio: 362 / 510;
+  aspect-ratio: 362 / 512;
   overflow: hidden;
   background: #d9d9d9;
   box-shadow: var(--shadow);
@@ -53,16 +54,18 @@ usePageSeo(
   object-fit: cover;
 }
 .review__company {
-  margin-top: 16px;
-  font-size: var(--fs-text3);
+  margin-top: 20px;
+  font-size: var(--fs-text);
+  line-height: 35px;
 }
 .review__year {
-  font-size: var(--fs-text3);
-  color: var(--grey);
+  font-size: var(--fs-text);
+  line-height: 35px;
+  color: var(--grey-text);
 }
 @media (max-width: 1023px) {
   .reviews__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 </style>

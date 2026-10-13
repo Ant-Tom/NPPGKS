@@ -49,11 +49,13 @@ const others = services.filter(s => s !== service)
   flex-wrap: wrap;
   gap: 8px;
   padding-top: 24px;
-  color: var(--grey);
+  color: var(--grey-text);
   font-size: var(--fs-caption);
 }
 .crumbs a {
   color: inherit;
+  padding-block: 12px;
+  margin-block: -12px;
 }
 .head :deep(.page-head__title) {
   font-size: clamp(32px, 4.1vw, 70px);
@@ -70,7 +72,7 @@ const others = services.filter(s => s !== service)
 }
 .others__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(12px, 1.3vw, 22px);
   margin: 0;
   padding: 0;
@@ -81,7 +83,7 @@ const others = services.filter(s => s !== service)
 }
 @media (max-width: 1023px) {
   .others__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 }
 </style>

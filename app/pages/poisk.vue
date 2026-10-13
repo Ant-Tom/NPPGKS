@@ -50,6 +50,6 @@ const results = computed(() => {
   margin-top: 12px;
 }
 .search__empty {
-  color: var(--grey);
+  color: var(--grey-text);
 }
 </style>

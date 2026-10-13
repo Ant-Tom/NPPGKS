@@ -1,5 +1,6 @@
 // Структура сайта и контакты — единый источник для меню, футера и разметки.
 import { categories, categoryUrl } from './products'
+import { typoDeep } from '~/utils/typo'
 
 export interface NavLink {
   label: string
@@ -9,7 +10,7 @@ export interface NavLink {
 
 export const productCategories: NavLink[] = categories.map(c => ({ label: c.label, to: categoryUrl(c) }))
 
-export const services: NavLink[] = [
+export const services: NavLink[] = typoDeep([
   {
     label: 'Проведение работ по анализу опасностей и рисков (HAZOP), определению целевого уровня интегральной безопасности (SIL)',
     to: '/uslugi/hazop-sil',
@@ -18,7 +19,7 @@ export const services: NavLink[] = [
   { label: 'Разработка проектной и рабочей документации', to: '/uslugi/proektnaya-dokumentaciya' },
   { label: 'Сервисное и метрологическое обслуживание', to: '/uslugi/servisnoe-obsluzhivanie' },
   { label: 'Электротехническая лаборатория', to: '/uslugi/elektrolaboratoriya' },
-]
+])
 
 export const aboutPages: NavLink[] = [
   { label: 'Общая информация', to: '/o-kompanii' },
@@ -75,7 +76,7 @@ export const company = {
   ],
 }
 
-export const offices: Office[] = [
+export const offices: Office[] = typoDeep([
   {
     title: 'Центральный офис (г. Казань)',
     city: 'Казань',
@@ -96,7 +97,7 @@ export const offices: Office[] = [
     phones: ['+7 (85594) 7 49 10', '+7 (85594) 7 77 74'],
     coords: [54.5378, 52.7985],
   },
-]
+])
 
 /** tel:-ссылка из телефона в любом формате */
 export const telHref = (phone: string) => 'tel:' + phone.replace(/[^\d+]/g, '')

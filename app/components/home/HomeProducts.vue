@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Три основных направления продукции. Фото коллажей — из макета «Продукция» (/public/images/products/)
-const items = [
+const items = typoDeep([
   {
     title: 'Системы измерений количества и показателей качества',
     text: 'НПП «ГКС» осуществляет проектирование, производство, шеф-монтаж, пусконаладочные работы, метрологическое обеспечение и ввод в действие систем измерений количества и показателей качества (узлов учёта)',
@@ -17,12 +17,12 @@ const items = [
   },
   {
     title: 'Системы автоматизации технологических процессов',
-    text: 'Наше предприятие выполняет проекты комплексной автоматизации технологических процессов и производств, а также обеспечение их противопожарной защиты',
+    text: 'Наше предприятие выполняет проекты комплексной автоматизации технологических процессов и производств, а также обеспечение их противоаварийной защиты и противопожарной безопасности',
     to: '/produkciya/sistemy-avtomatizacii',
     layout: 'c',
     photos: ['/images/products/shau.jpg', '/images/products/po.jpg', '/images/products/nku.jpg'],
   },
-]
+])
 </script>
 
 <template>
@@ -58,35 +58,41 @@ const items = [
 </template>
 
 <style scoped>
+/* макет: заголовок через 106px после «О компании», список через 87px, «Преимущества» через 160px после кнопки */
 .products {
-  padding: clamp(64px, 7.5vw, 128px) 0 clamp(64px, 7.5vw, 128px);
+  padding: clamp(56px, 6.24vw, 106px) 0 clamp(80px, 9.4vw, 160px);
 }
 .products__list {
-  margin: clamp(40px, 5.9vw, 100px) 0 0;
+  margin: clamp(40px, 5.12vw, 87px) 0 0;
   padding: 0;
   list-style: none;
 }
+/* строка 262px: верх заглавных заголовка — по верху коллажа, 60px от текста до линии */
 .row {
-  padding: 0 0 60px;
-  border-bottom: 0.5px solid var(--grey);
+  padding: 0 0 48px;
+  border-bottom: 1px solid var(--grey);
+}
+.row:last-child {
+  border-bottom: 0;
 }
 .row + .row {
   padding-top: 80px;
 }
 .row__inner {
   display: grid;
-  grid-template-columns: 500px 1fr;
+  grid-template-columns: 500px minmax(0, 1fr);
   gap: 40px clamp(40px, 6.8vw, 115px);
   align-items: start;
 }
 .row__text {
   display: flex;
   flex-direction: column;
-  gap: clamp(20px, 2.35vw, 40px);
+  gap: clamp(12px, 0.9vw, 15px);
   max-width: 884px;
 }
 .row__text .h2 {
   max-width: 600px;
+  margin-top: -0.44em;
 }
 .row__link {
   text-decoration: underline;

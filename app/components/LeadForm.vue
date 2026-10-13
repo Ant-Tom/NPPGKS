@@ -196,8 +196,8 @@ async function submit(e: Event) {
 }
 .form__consent input {
   flex-shrink: 0;
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   margin: 1px 0 0;
   accent-color: var(--green);
 }

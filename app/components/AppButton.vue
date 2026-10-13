@@ -30,7 +30,7 @@ withDefaults(defineProps<{ to?: string, type?: 'button' | 'submit', arrow?: bool
   text-decoration: none;
   border: 0;
   cursor: pointer;
-  filter: drop-shadow(0 0 20px rgba(27, 28, 33, 0.2));
+  box-shadow: var(--shadow);
   transition: background 0.2s;
 }
 .btn:hover {
