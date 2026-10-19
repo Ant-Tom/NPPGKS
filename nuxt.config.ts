@@ -37,8 +37,9 @@ export default defineNuxtConfig({
       titleTemplate: '%s — НПП ГКС',
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-        // основной шрифт — сразу в предзагрузку, чтобы не было «прыжка» текста
-        { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: '', href: '/fonts/pt-sans-cyrillic-400-normal.woff2' },
+        // оба начертания шрифта — сразу в предзагрузку, чтобы не было «прыжка» текста
+        { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: '', href: '/fonts/pt-sans-400.woff2' },
+        { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: '', href: '/fonts/pt-sans-700.woff2' },
       ],
       meta: [{ name: 'theme-color', content: '#111111' }],
       // признак включённого JS — от него зависят анимации появления (v-reveal)
@@ -61,6 +62,11 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    // шрифты, иконки и картинки меняются редко — кешируем в браузере на неделю
+    '/fonts/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/icons/**': { headers: { 'cache-control': 'public, max-age=604800' } },
+    '/images/**': { headers: { 'cache-control': 'public, max-age=604800' } },
+    '/_ipx/**': { headers: { 'cache-control': 'public, max-age=604800' } },
   },
 
   image: {
